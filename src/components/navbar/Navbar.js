@@ -15,15 +15,20 @@ import Search from "./Search";
 import CustomButtons from "./CustomButtons";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
+import { red } from "@mui/material/colors";
+import { useLocation } from "react-router-dom";
 const logoURL =
   "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/flipkart-plus_8d85f4.png";
 
 const subURL =
   "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/plus_aef861.png";
 
-function Navbar() {
+function Navbar(props) {
   //  for responsive navbar
   const [openDrawer, setOpenDrawer] = useState(false);
+
+  const location = useLocation();
+  const name = location.state && location.state.name;
 
   function handleOpenDrawer() {
     setOpenDrawer((prev) => !prev);
@@ -42,29 +47,21 @@ function Navbar() {
   }
 
   return (
-    <StyledNavbar>
-      <Toolbar
-        style={{
-          minHeight: "55px",
-          display: "flex",
-          justifyContent: "space-around",
+    <StyledNavbar style={{height: "55px", justifyContent: "center"}}>
+      <Toolbar style={{ minHeight: "35px", display: "flex", justifyContent: "space-around",
         }}
       >
-        <MenuButton
-          aria-label="delete"
-          color="inherit"
-          onClick={handleOpenDrawer}
-        >
-          <MenuIcon />
+        <MenuButton aria-label="delete" color="inherit"onClick={handleOpenDrawer}>
+                <MenuIcon />
         </MenuButton>
 
         <Drawer open={openDrawer} onClose={handleOpenDrawer}>
-          {list()}
+             {list()}
         </Drawer>
 
-        <Component to="/">
-          <img src={logoURL} alt="logo" style={{ width: 75 }} />
-
+        <Component to="/" style={{marginLeft: 160, marginTop: 10}}>
+          <img src={logoURL} alt="logo" style={{width: 75 }} />
+          <h1>{name}</h1>
           <Box style={{ display: "flex" }}>
             <Subheading>
               Explore &nbsp;
@@ -73,6 +70,7 @@ function Navbar() {
               </Box>
             </Subheading>
             <PlusImage src={subURL} alt="" />
+            
           </Box>
         </Component>
 

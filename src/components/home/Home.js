@@ -45,6 +45,7 @@ function Home() {
               products={categorys.data}
               pageTitle={categorys.category}
               isTimer={false}
+              
             />
           );
         })}

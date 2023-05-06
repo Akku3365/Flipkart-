@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import DetailView from "./components/details/DetailView";
 import RootLayout from "./components/sharedlayout/RootLayout";
 import Cart from "./components/cart/Cart";
+// import Login from "./components/home/Login";
 import Checkout from "./components/checkout/Checkout";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

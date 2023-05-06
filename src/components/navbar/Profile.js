@@ -25,9 +25,9 @@ function Profile({ name }) {
     <>
       <NameWrapper
         onClick={handleClick}
-        style={{ width: "130px", textAlign: "center", marginLeft: "20px" }}
+        style={{ width: "130px", textAlign: "center", marginLeft: "20px"}}
       >
-        <Typography>{name}</Typography>
+        <Typography style={{border: "2px solid black"}}>{name}</Typography>
       </NameWrapper>
 
       <Menu
