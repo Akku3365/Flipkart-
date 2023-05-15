@@ -1,45 +1,78 @@
-import { Box, Button, Typography, styled } from "@mui/material";
-import React from "react";
+import { Box, Typography, styled } from "@mui/material";
+import React,{useState, useHistory} from "react";
 import { ShoppingCart } from "@mui/icons-material/";
-import { useAuth0 } from "@auth0/auth0-react";
 import Profile from "./Profile";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+// import LoginPopup from "./LoginpopUp"
 import { formatAmount } from "../../constant/data";
+import AuthButton from "./AuthButton";
+
+const Wrapper = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  margin: "0 3% 0 auto",
+  "& > *": {
+    marginRight: "40px !important",
+  },
+  [theme.breakpoints.down("md")]: {
+    display: "block",
+  },
+}));
+
+const Container = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  cursor: "pointer",
+}));
 
 
-function CustomButtons() {
-  
-  const { logout, loginWithRedirect, isAuthenticated} = useAuth0();
-  console.log(isAuthenticated);
+const CustomButtons = () => {
+   
   const { totalQuantity, totalCartPrice } = useSelector((state) => state.cart);
 
-// const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('userData') !== null);
+
+  const [inpval, setInpval] = useState({
+    email: '',
+    password: '',
+  });
+
+  const getdata = (e) => {
+    const { value, name } = e.target;
+
+    setInpval((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const addData = (e) => {
+    e.preventDefault();
+
+    // Your existing logic here
+    // ...
+
+    // After successful login
+    setIsLoggedIn(true);
+    // history.push('/');
+  };
+
 
   const handleLogout = () => {
-    logout({ logoutParams: { returnTo: window.location.origin } });
+    console.log("Logout Clicked");
+    localStorage.removeItem('userData');
+    setIsLoggedIn(false);
   };  
 
   
   return (
     <Wrapper> 
-        <LoginButton
-          variant="contained"
-          onClick={() => loginWithRedirect()}
-          style={{ width: "110px", marginLeft: "20px" }}
-        >
-          Login
-        </LoginButton>
-        <LoginButton onClick={() => handleLogout()} style={{ height: "35px" }}>
-             Logout
-          </LoginButton>
-      {/* {isLoading && <Typography>Loading...</Typography>} */}
+     
+     <AuthButton isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+               <Typography style={{ width: "140px" }}>Become a Seller</Typography>
 
-      {/* {isAuthenticated && <Profile name={user.name} isLoading={isLoading} />} */}
-
-      {/* <Typography style={{ width: "140px" }}>Become a Seller</Typography> */}
-
-      <Typography>More</Typography>
+               <Typography>More</Typography>
 
       <Link
         to={ "/cart"}
@@ -92,44 +125,15 @@ function CustomButtons() {
 
 export default CustomButtons;
 
-// const Wrapper = styled(Box)`
-//   display: flex;
-//   align-items: center;
-//   margin: 0 3% 0 auto;
-//   & > button,
-//   & > p,
-//   & > div {
-//     margin-right: 40px;
-//   }
-// `;
 
-const Wrapper = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  margin: "0 3% 0 auto",
-  "& > *": {
-    marginRight: "40px !important",
-  },
-  [theme.breakpoints.down("md")]: {
-    display: "block",
-  },
-}));
 
-const Container = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  cursor: "pointer",
-}));
 
-const LoginButton = styled(Button)`
-  color: #2874f0;
-  background-color: #fff;
-  padding: 5px 30px;
-  border-radius: 2px;
-  box-shadow: none;
-  font-weight: 600;
-  &:hover {
-    background-color: #7eacf6;
-    color: #fff;
-  }
-`;
+
+
+
+
+
+
+
+
+

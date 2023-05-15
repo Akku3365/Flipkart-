@@ -12,7 +12,7 @@ function Search() {
     setInputSearch(e.target.value.toLowerCase());
   }
   return (
-    <SearchContainer style={{ width: "1200px"}}>
+    <SearchContainer style={{ width: "515px", height: "38px", marginLeft: "20px", textAlign: "center"}}>
       <InputSearchBase
         placeholder="Search for products, brand and more"
         onChange={onChangeHandler}
@@ -20,7 +20,7 @@ function Search() {
         
       />
       <SearchIconWrapper style={{ padding: "7px 2px 2px 2px"}}>
-        <SearchIcon />
+        <SearchIcon style={{marginTop: "2px", paddingBottom: "2px", fontSize: "28px"}}/>
       </SearchIconWrapper>
       {inputSearch !== "" && (
         <ListWrapper style={{ height: "60vh" }}>
