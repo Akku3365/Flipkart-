@@ -8,10 +8,9 @@ const AuthButton = ({ isLoggedIn, onLogout }) => {
   const myStyle = {
     background: 'white',
     color: '#2874f0',
-    width: '120px',
+    width: '100px',
     height: '30px',
     border: 'none',
-    marginRight: '3px',
   };
 
   useEffect(() => {
